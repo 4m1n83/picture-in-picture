@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    video {
+      border: 1px solid red;
+      width: 200px;
+      margin-top: 1rem;
+      display: block;
+    }
+  </style>
+  <body>
+    <button class="button-video">Request Video Only</button>
+    <button class="button-page">Request Page Video</button>
+    <div class="video-wrapper">
+      <h3>That's a nice video</h3>
+      <video controls>
+        <source
+          src="https://cdn.pixabay.com/video/2025/07/27/293788_large.mp4"
+          type="video/mp4"
+        />
+      </video>
+    </div>
+  </body>
+  <script>
+    document.querySelector(".button-video").onclick = function () {
+      const video = document.querySelector("video");
+      video.play();
+      video.requestPictureInPicture();
+    };
+    const videoWrapper = document.querySelector("video-wrapper");
+    document.querySelector(".button-page").onclick = async function () {
+      const pipWin = await documentPictureInPicture.requestWindow({
+        width: 250,
+        height: 250,
+      });
+      pipWin.document.body.innerHTML = `
+        <style>
+            video {
+                border: 1px solid red;
+                width: 200px;
+                margin-top: 1rem;
+                display: block;
+            }
+        </style>
+        <div class="video-wrapper">
+            <h3>That's a nice video</h3>
+            <video controls>
+                <source
+                src="https://cdn.pixabay.com/video/2025/07/27/293788_large.mp4"
+                type="video/mp4"
+                >
+            </video>
+        </div>
+      `;
+    };
+  </script>
+</html>
